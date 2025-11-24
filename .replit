@@ -1,6 +1,5 @@
-"""
-Replit Configuration
-Automatically configures the project for Replit deployment
-"""
+run = "python web_ui.py"
+language = "python3"
 
-# This file tells Replit how to run your app
+[nix]
+channel = "stable-22_11"
