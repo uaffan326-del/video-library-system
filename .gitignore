@@ -1,0 +1,39 @@
+# Environment
+.env
+venv/
+env/
+ENV/
+
+# Database
+*.db
+*.sqlite
+
+# Video files
+processed_clips/
+downloads/
+thumbnails/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

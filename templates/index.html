@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Library Browser</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎬 Video Library Browser</h1>
+            <div class="stats" id="stats">
+                <span class="stat-item">📊 Loading...</span>
+            </div>
+        </header>
+
+        <!-- Search & Filters -->
+        <div class="search-section">
+            <!-- Scraping Control Panel -->
+            <div class="scraping-panel" id="scrapingPanel">
+                <h3>⚙️ Content Scraper</h3>
+                <div class="scraping-controls">
+                    <div class="scraping-input-group">
+                        <input 
+                            type="text" 
+                            id="scrapingQueries" 
+                            placeholder="Search queries (comma-separated: nature, urban, abstract...)"
+                            class="scraping-input"
+                            value="abstract motion, nature scenic, city timelapse"
+                        >
+                        <select id="videosPerQuery" class="scraping-select">
+                            <option value="1">1 video/query</option>
+                            <option value="2" selected>2 videos/query</option>
+                            <option value="3">3 videos/query</option>
+                            <option value="5">5 videos/query</option>
+                        </select>
+                    </div>
+                    <div class="scraping-buttons">
+                        <button onclick="startScraping()" id="startBtn" class="btn btn-accent">
+                            🚀 Start Scraping
+                        </button>
+                        <button onclick="stopScraping()" id="stopBtn" class="btn btn-secondary" style="display: none;">
+                            ⏹️ Stop
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Progress Section -->
+                <div id="scrapingProgress" class="scraping-progress" style="display: none;">
+                    <div class="progress-info">
+                        <span id="progressStatus">Initializing...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="progressTask">Preparing...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search by keywords (e.g., nature, urban, abstract)..."
+                    class="search-input"
+                >
+                <button onclick="searchVideos()" class="btn btn-primary">Search</button>
+                <button onclick="clearFilters()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="moodFilter">Mood:</label>
+                    <select id="moodFilter" onchange="searchVideos()">
+                        <option value="">All Moods</option>
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                        <option value="neutral">Neutral</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="colorFilter">Color:</label>
+                    <select id="colorFilter" onchange="searchVideos()">
+                        <option value="">All Colors</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="limitFilter">Results:</label>
+                    <select id="limitFilter" onchange="searchVideos()">
+                        <option value="20">20</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lyric Search -->
+            <div class="lyric-search">
+                <h3>🎵 Find Video for Lyric</h3>
+                <div class="lyric-input-group">
+                    <input 
+                        type="text" 
+                        id="lyricInput" 
+                        placeholder="Enter a lyric line (e.g., 'dancing under the stars')..."
+                        class="lyric-input"
+                    >
+                    <select id="lyricMood">
+                        <option value="">Auto-detect mood</option>
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                        <option value="neutral">Neutral</option>
+                    </select>
+                    <button onclick="searchByLyric()" class="btn btn-accent">Find Match</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading videos...</p>
+        </div>
+
+        <!-- Results Count -->
+        <div class="results-info" id="resultsInfo" style="display: none;">
+            <span id="resultsCount">0 videos found</span>
+        </div>
+
+        <!-- Video Grid -->
+        <div class="video-grid" id="videoGrid">
+            <!-- Videos will be loaded here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>No videos found. Try different search terms or clear filters.</p>
+        </div>
+
+        <!-- Video Modal -->
+        <div id="videoModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modalBody">
+                    <!-- Video details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
