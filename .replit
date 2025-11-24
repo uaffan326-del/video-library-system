@@ -3,3 +3,7 @@ language = "python3"
 
 [nix]
 channel = "stable-22_11"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
